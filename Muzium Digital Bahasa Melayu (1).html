@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Muzium Digital Bahasa Melayu</title>
+<style>
+:root{--p:#312e81;--s:#0d9488;--a:#f59e0b;--bg:#fffbf2;--card:#ffffff;--t:#1f2937;--mut:#4b5563;--bd:#e5e7eb;--hero:linear-gradient(135deg,#312e81,#0d9488);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f172a;--card:#1e293b;--t:#f1f5f9;--mut:#cbd5e1;--bd:#334155;--p:#a5b4fc;--hero:linear-gradient(135deg,#1e1b4b,#115e59)}}
+:root[data-theme="dark"]{--bg:#0f172a;--card:#1e293b;--t:#f1f5f9;--mut:#cbd5e1;--bd:#334155;--p:#a5b4fc;--hero:linear-gradient(135deg,#1e1b4b,#115e59)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--t);font:16px/1.65 "Segoe UI",Roboto,Arial,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:60}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--card);border-bottom:1px solid var(--bd);display:flex;gap:.4rem;overflow-x:auto;padding:.6rem 1rem;align-items:center}
+nav b{white-space:nowrap;color:var(--p);margin-right:.5rem}
+nav a{white-space:nowrap;text-decoration:none;color:var(--t);padding:.4rem .9rem;border-radius:999px;font-size:.9rem;font-weight:600}
+nav a:hover{background:var(--s);color:#fff}
+#bar{position:fixed;top:calc(env(safe-area-inset-top,0px) + 52px);left:0;height:4px;width:0;background:var(--a);z-index:55;transition:width .4s}
+section{padding:4rem 1rem}.w{max-width:1200px;margin:0 auto}
+h2{font-size:clamp(1.6rem,4vw,2.4rem);color:var(--p);margin:0 0 .4rem}.sub{color:var(--mut);margin:0 0 1.6rem}
+#utama{min-height:90vh;background:var(--hero);color:#fff;display:flex;align-items:center}
+#utama .w{display:grid;grid-template-columns:1.3fr 1fr;gap:2rem;align-items:center}
+#utama h1{font-size:clamp(2rem,6vw,3.6rem);line-height:1.1;margin:.3rem 0}
+.tag{display:inline-block;background:rgba(255,255,255,.18);padding:.3rem .9rem;border-radius:999px;font-size:.85rem}
+.btn{display:inline-block;border:0;cursor:pointer;background:var(--a);color:#1f2937;font-weight:700;padding:.8rem 1.6rem;border-radius:999px;text-decoration:none;font-size:1rem;box-shadow:0 0 18px rgba(245,158,11,.55);margin:.4rem .4rem 0 0}
+.btn.alt{background:transparent;color:inherit;border:2px solid currentColor;box-shadow:none}
+.btn:focus-visible,nav a:focus-visible,.opt:focus-visible{outline:3px solid var(--a);outline-offset:2px}
+.mascot{text-align:center;animation:bob 3s ease-in-out infinite}
+.bubble{background:#fff;color:#1f2937;border-radius:18px;padding:.8rem 1rem;display:inline-block;max-width:280px;margin-bottom:.6rem;font-weight:600}
+.arm{transform-origin:150px 150px;animation:wave 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px)}}@keyframes wave{50%{transform:rotate(-28deg)}}
+.grid{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:1.3rem;box-shadow:0 8px 24px rgba(49,46,129,.08);transition:transform .25s}
+.card:hover{transform:translateY(-4px)}.card h3{margin:.2rem 0 .4rem;color:var(--p)}
+.ic{font-size:2rem}.yr{display:inline-block;background:var(--s);color:#fff;border-radius:999px;padding:.1rem .8rem;font-weight:700;font-size:.85rem}
+.tl{position:relative;border-left:4px solid var(--s);margin-left:.6rem;padding-left:1.4rem}
+.tl .card{margin-bottom:1.1rem;cursor:pointer}.tl .card::before{content:"";position:absolute;left:-2.1rem;width:18px;height:18px;border-radius:50%;background:var(--a);border:3px solid var(--bg);margin-top:.4rem}
+.more{display:none;margin-top:.5rem;color:var(--mut)}.card.open .more{display:block}
+.say{background:none;border:1px solid var(--bd);color:var(--t);border-radius:999px;cursor:pointer;padding:.15rem .7rem;font-size:.8rem}
+.jawi{font-size:2rem;direction:rtl;font-family:"Noto Naskh Arabic","Traditional Arabic",serif}
+.alt-bg{background:linear-gradient(180deg,rgba(13,148,136,.09),rgba(245,158,11,.08))}
+.cols{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.opt{background:var(--card);border:2px solid var(--bd);color:var(--t);border-radius:14px;padding:.7rem 1rem;cursor:pointer;text-align:left;font:inherit;min-height:44px}
+.opt.sel{border-color:var(--a);background:rgba(245,158,11,.18)}.opt.ok{border-color:#16a34a;background:rgba(22,163,74,.18)}.opt.bad{border-color:#dc2626;background:rgba(220,38,38,.15)}
+.fc{perspective:900px;height:170px;cursor:pointer}.fc>div{position:relative;height:100%;transition:transform .6s;transform-style:preserve-3d}.fc.flip>div{transform:rotateY(180deg)}
+.fc .f,.fc .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;font-weight:600}
+.fc .f{background:var(--hero);color:#fff}.fc .b{background:var(--a);color:#1f2937;transform:rotateY(180deg)}
+.fb{min-height:1.6rem;font-weight:700;margin-top:.6rem}.score{font-size:1.2rem;font-weight:800;color:var(--s)}
+table{width:100%;border-collapse:collapse}td,th{border:1px solid var(--bd);padding:.5rem;text-align:left;vertical-align:top}th{background:var(--p);color:#fff}
+.wrap{overflow-x:auto}
+.ref{padding-left:2rem;text-indent:-2rem;margin:.6rem 0}
+footer{background:var(--p);color:#fff;text-align:center;padding:2rem 1rem}
+#top{position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));width:48px;height:48px;border-radius:50%;border:0;background:var(--a);font-size:1.3rem;cursor:pointer;display:none;z-index:50}
+@media(max-width:800px){#utama .w{grid-template-columns:1fr}section{padding:3rem 1rem}}
+.bar{display:flex;align-items:center;gap:.6rem;margin:.4rem 0}.bar span{width:150px;font-size:.85rem}.bar i{display:block;height:20px;border-radius:10px;background:linear-gradient(90deg,var(--s),var(--a))}
+.sp{margin-top:.7rem}
+#aip #ail{max-height:120px}#sq{max-height:170px;overflow-y:auto;margin-top:.5rem;display:flex;flex-direction:column;gap:.3rem}#sq button{text-align:left;border-radius:10px;padding:.3rem .6rem;font-size:.82rem}
+.flash{animation:fl 1.6s}@keyframes fl{0%,60%{box-shadow:inset 0 0 0 6px var(--a)}100%{box-shadow:none}}
+#ai{position:fixed;right:1rem;bottom:calc(5rem + env(safe-area-inset-bottom,0px));z-index:70}
+#aib{width:56px;height:56px;border-radius:50%;border:0;background:var(--s);color:#fff;font-size:1.6rem;cursor:pointer;box-shadow:0 0 18px rgba(13,148,136,.6)}
+#aip{display:none;position:absolute;right:0;bottom:66px;width:min(360px,calc(100vw - 2rem));background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:1rem;box-shadow:0 12px 36px rgba(0,0,0,.25)}
+#ail{max-height:200px;overflow-y:auto;font-size:.92rem}#ail p{margin:.4rem 0;padding:.5rem .8rem;border-radius:12px;background:var(--bg)}#ail p.u{background:var(--s);color:#fff;text-align:right}
+#aiq{width:100%;padding:.6rem;border-radius:12px;border:1px solid var(--bd);background:var(--bg);color:var(--t);font:inherit}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav aria-label="Navigasi utama"><b>🏛️ Muzium Digital BM</b>
+<a href="#utama">Halaman Utama</a><a href="#pengenalan">Pengenalan</a><a href="#akademik">Etika &amp; Ejaan</a><a href="#kronologi">Galeri Tulisan</a><a href="#dbp">Galeri DBP</a><a href="#cabaran">Cabaran</a><a href="#aktiviti">Aktiviti</a><a href="#misi">Misi</a><a href="#simulasi">Simulasi</a><a href="#kuiz">Kuiz</a><a href="#rujukan">Rujukan</a></nav>
+
+<section id="utama"><div class="w">
+<div><span class="tag">GKEB 1072 · Tugasan 2 · IPG · PPISMP</span>
+<h1>Selamat Datang ke Muzium Digital Bahasa Melayu</h1>
+<p>Jelajahi galeri sejarah tulisan Melayu, peranan Dewan Bahasa dan Pustaka (DBP) serta cabaran bahasa Melayu dalam sistem pendidikan masa depan.</p>
+<a class="btn" href="#kronologi">Mulakan Lawatan</a><a class="btn alt" href="#kuiz">Terus ke Kuiz</a>
+<p style="margin-top:1rem">Kemajuan lawatan anda: <b id="pg">0%</b></p></div>
+<div class="mascot"><div class="bubble" id="bub">Hai! Saya Pemandu Muzium. Jom kenali tulisan kita!</div>
+<svg viewBox="0 0 300 330" width="100%" style="max-width:300px" role="img" aria-label="Maskot pemandu muzium lelaki berbaju batik dan bersongkok">
+<ellipse cx="150" cy="318" rx="80" ry="10" fill="rgba(0,0,0,.25)"/>
+<rect x="95" y="150" width="110" height="130" rx="30" fill="#f59e0b"/><path d="M110 170l30 30M170 175l25 25M120 230l25-20M180 240l-20-25" stroke="#312e81" stroke-width="5" stroke-linecap="round"/>
+<rect x="110" y="270" width="30" height="40" rx="8" fill="#1e1b4b"/><rect x="160" y="270" width="30" height="40" rx="8" fill="#1e1b4b"/>
+<g class="arm"><rect x="195" y="140" width="22" height="80" rx="11" fill="#f59e0b" transform="rotate(-30 206 150)"/><circle cx="232" cy="82" r="14" fill="#fcd5a5"/></g>
+<rect x="83" y="160" width="22" height="80" rx="11" fill="#f59e0b"/>
+<circle cx="150" cy="110" r="48" fill="#fcd5a5"/><rect x="108" y="52" width="84" height="38" rx="10" fill="#111827"/><rect x="108" y="82" width="84" height="8" fill="#f59e0b"/>
+<circle cx="133" cy="112" r="6" fill="#111827"/><circle cx="167" cy="112" r="6" fill="#111827"/><path d="M132 132q18 16 36 0" stroke="#111827" stroke-width="4" fill="none" stroke-linecap="round"/></svg></div>
+</div></section>
+
+<section id="pengenalan"><div class="w"><h2>Pengenalan Muzium</h2><p class="sub">Empat galeri utama yang perlu anda lawati.</p>
+<div class="grid">
+<div class="card"><div class="ic">📜</div><h3>Galeri Tulisan</h3><p>Dari aksara Pallava dan Kawi hingga Jawi dan Rumi mengikut kronologi.</p></div>
+<div class="card"><div class="ic">🏛️</div><h3>Galeri DBP</h3><p>Peranan Dewan Bahasa dan Pustaka dalam memartabatkan bahasa Melayu.</p></div>
+<div class="card"><div class="ic">🎓</div><h3>Galeri Cabaran</h3><p>Penilaian kritis cabaran bahasa Melayu dalam pendidikan masa depan.</p></div>
+<div class="card"><div class="ic">🎮</div><h3>Ruang Aktiviti</h3><p>Padanan, susunan kronologi, kad imbas dan kuiz bermarkah.</p></div></div>
+</div></section>
+
+<section id="akademik" class="alt-bg"><div class="w"><h2>Etika Penulisan, Ejaan &amp; Tatabahasa</h2><p class="sub">Asas penulisan akademik yang beretika.</p>
+<div class="cols">
+<div class="card"><h3>⚖️ Etika &amp; Plagiat</h3><p>Plagiat ialah mengambil idea atau ayat orang lain tanpa pengiktirafan. Elakkan dengan: (1) memparafrasa dalam bahasa sendiri, (2) membuat sitasi dalam teks, (3) menyenaraikan rujukan APA 7, dan (4) memeriksa indeks Turnitin (tidak melebihi 30%).</p>
+<p><b>Contoh sitasi APA 7:</b> Mohd. Alwee Yusoff (2005) menyatakan bahawa Jawi digunakan sebagai tulisan rasmi sejak abad ke-14 Masihi. Atau: (Mohd. Alwee Yusoff, 2005).</p></div>
+<div class="card"><h3>✍️ Sistem Ejaan</h3><p>Sistem ejaan Rumi telah melalui beberapa tahap: kaedah Wilkinson (1902), ejaan Za’ba (Daftar Ejaan Melayu 1941), dan Ejaan Baru yang diisytiharkan secara rasmi di Malaysia dan Indonesia pada 16 Ogos 1972 (Mohd. Alwee Yusoff, 2005). Pedoman Transliterasi Huruf Arab ke Huruf Rumi (1984) pula membantu menyeragamkan kata pinjaman Arab.</p></div>
+<div class="card"><h3>📘 Asas Tatabahasa</h3><div class="wrap"><table><tr><th>Unsur</th><th>Contoh betul</th></tr><tr><td>Imbuhan</td><td>menulis, pembelajaran</td></tr><tr><td>Kata hubung</td><td>kerana, manakala, namun</td></tr><tr><td>Kata sendi</td><td>di (tempat) / ke / daripada</td></tr><tr><td>Penjodoh bilangan</td><td>sebuah manuskrip</td></tr></table></div>
+<button class="say" onclick="say('Bahasa jiwa bangsa')">🔊 Sebutan</button></div></div></div></section>
+
+<section id="kronologi"><div class="w"><h2>Galeri 1: Kronologi Sistem Tulisan Melayu</h2><p class="sub">Klik kad untuk membaca butiran. Sumber: Mohd. Alwee Yusoff (2005); Abdul Hamid dan Abdullah (2009).</p>
+<div class="tl" id="tl"></div>
+<div class="card"><h3>🔤 Jawi lawan Rumi</h3><div class="wrap"><table><tr><th>Aspek</th><th>Jawi</th><th>Rumi</th></tr><tr><td>Asal</td><td>Abjad Arab, diubah suai</td><td>Abjad Latin (Etruscan, Greek, Latin)</td></tr><tr><td>Kemasukan</td><td>Bersama Islam</td><td>Portugis ke Melaka, 1511</td></tr><tr><td>Taraf rasmi</td><td>Tulisan utama hingga era kolonial</td><td>Tulisan rasmi bahasa kebangsaan (Akta 1963/67)</td></tr></table></div>
+<p class="jawi" lang="ar">بهاس ملايو</p><p>Contoh Jawi: <i>bahasa Melayu</i>.</p></div></div></section>
+
+<section id="dbp" class="alt-bg"><div class="w"><h2>Galeri 2: Peranan Dewan Bahasa dan Pustaka</h2><p class="sub">DBP ditubuhkan pada 22 Jun 1956 (Abdul Hamid &amp; Abdullah, 2009).</p>
+<div class="grid">
+<div class="card"><div class="ic">📖</div><h3>Pembinaan Bahasa</h3><p>Menyelaras ejaan, istilah dan tatabahasa. Contohnya Daftar Ejaan Rumi-Jawi (1988) dan Pedoman Transliterasi (1984).</p></div>
+<div class="card"><div class="ic">📚</div><h3>Penerbitan &amp; Kamus</h3><p>Menerbitkan buku, kamus dan majalah bahasa seperti Pelita Bahasa.</p></div>
+<div class="card"><div class="ic">🧭</div><h3>Pemantapan Jawi</h3><p>Menganjurkan konvensyen Jawi (Terengganu, 1984) bersama Yayasan Islam Terengganu dan mengeluarkan padanan huruf Arab–Rumi.</p></div>
+<div class="card"><div class="ic">🤝</div><h3>Kerjasama Serantau</h3><p>Terlibat dalam penyelarasan ejaan Malaysia–Indonesia (Jawatankuasa Ejaan Malindo). DBP juga memperkukuh rangkaian kerjasama kebahasaan dan kesusasteraan serantau melalui Majlis Sastera Asia Tenggara (MASTERA) dan Majlis Bahasa Brunei Darussalam-Indonesia-Malaysia (Laupa Junus 2026).</p></div></div>
+<div class="grid" style="margin-top:1.2rem"><div class="card"><div class="ic">⚖️</div><h3>Ordinan DBP 1959</h3><p>DBP menjadi badan berkanun dengan kuasa autonomi menggubal dasar bahasa (Ho 2015).</p></div>
+<div class="card"><div class="ic">📌</div><h3>Empat Tugas Utama</h3><p>Memperkembang bahasa kebangsaan dan bakat sastera. Menerbitkan buku dan majalah. Menyeragamkan ejaan sebutan dan istilah (Ho 2015).</p></div>
+<div class="card"><div class="ic">📰</div><h3>Majalah DBP</h3><p>Dewan Bahasa (1957) Dewan Masyarakat (1963) Dewan Siswa (1979) dan Pelita Bahasa (1989) (Ho 2015).</p></div>
+<div class="card"><div class="ic">🗄️</div><h3>Pusat Dokumentasi Melayu</h3><p>Sehingga 1 Jun 2011 menyimpan 159,970 naskhah monograf (Ho 2015).</p></div></div>
+<div class="card" style="margin-top:1.2rem"><h3>📊 Infografik: Judul Buku DBP 1956 hingga 1991</h3><p class="sub">Jumlah keseluruhan 3,596 judul (Ho 2015).</p><div id="ig"></div></div>
+<h3 style="margin:1.6rem 0 .6rem;color:var(--p)">Sejarah dan Sumbangan DBP</h3>
+<div class="grid"><div class="card"><div class="ic">🏷️</div><h3>Balai Pustaka</h3><p>Pada mulanya jabatan kecil di bawah Kementerian Pendidikan di Johor Bahru. Selepas Kongres Bahasa dan Persuratan Melayu III pada September 1956 namanya menjadi Dewan Bahasa dan Pustaka (Laupa Junus 2024).</p></div>
+<div class="card"><div class="ic">📖</div><h3>Kamus Dewan Perdana</h3><p>Mempunyai 120 000 entri dan 7 000 data etimologi (Laupa Junus 2024).</p></div>
+<div class="card"><div class="ic">🌟</div><h3>Simbol Asas Negara</h3><p>Pada 17 September 1963 DBP diumumkan sebagai satu daripada tujuh simbol asas negara (Laupa Junus 2024).</p></div>
+<div class="card"><div class="ic">🕌</div><h3>Sokongan kepada Hari Jawi</h3><p>Awang Sariyan menegaskan Jawi menjadi tulisan bahasa Melayu hampir seribu tahun sebelum Rumi diterima sebagai tulisan rasmi (Bernama 2020).</p></div></div>
+<h3 style="margin:1.6rem 0 .6rem;color:var(--p)">DBP dalam Angka dan Era Digital (Laupa Junus 2026)</h3>
+<div class="grid"><div class="card"><div class="ic">📚</div><h3>17 869 Judul Buku</h3><p>Diterbitkan dari 1956 hingga 2025 dalam pelbagai bidang ilmu.</p></div>
+<div class="card"><div class="ic">🔤</div><h3>985 427 Istilah</h3><p>Dibentuk dari 1960 hingga 2024. Dua rujukan utama ialah Pedoman Umum Pembentukan Istilah Bahasa Melayu dan Daftar Kata Bahasa Melayu (Rumi Sebutan Jawi).</p></div>
+<div class="card"><div class="ic">🌐</div><h3>JendelaDBP</h3><p>Pelantar digital yang dicapai oleh 21 112 203 pelayar dari 189 negara sejak 8 Mei 2021 hingga 19 April 2026.</p></div>
+<div class="card"><div class="ic">🧭</div><h3>Pelan Strategik 2026 hingga 2030</h3><p>Menumpukan ekosistem bahasa Melayu dan pendigitalan organisasi termasuk data raya.</p></div>
+<div class="card"><div class="ic">🔍</div><h3>Audit dan Pantau Bahasa</h3><p>Ziarah bahasa dan pemantauan penggunaan bahasa Melayu di sektor awam dan tempat awam.</p></div>
+<div class="card"><div class="ic">🎉</div><h3>Ulang Tahun Ke-70</h3><p>DBP ditubuhkan di Johor Bahru pada 22 Jun 1956. Sambutan ke-70 bermula April 2026 dengan lebih 100 program.</p></div></div></div></section>
+
+<section id="cabaran"><div class="w"><h2>Galeri 3: Penilaian Kritis Cabaran Masa Depan</h2><p class="sub">Klik setiap kad untuk menilai kekuatan dan cabaran.</p>
+<div class="grid" id="chal"></div></div></section>
+
+<section id="aktiviti" class="alt-bg"><div class="w"><h2>Ruang Aktiviti Interaktif</h2><p class="sub">Tahap sederhana. Skor aktiviti: <span class="score" id="asc">0</span></p>
+<div class="cols">
+<div class="card"><h3>1. Padankan Tahun dengan Peristiwa</h3><p>Klik satu tahun, kemudian peristiwa yang betul.</p><div class="chips" id="m1"></div><div class="chips" id="m2" style="margin-top:.6rem"></div><div class="fb" id="mfb"></div></div>
+<div class="card"><h3>2. Susun Kronologi</h3><p>Klik item mengikut urutan dari yang paling awal.</p><div class="chips" id="o1"></div><div class="fb" id="ofb"></div><button class="btn" onclick="initO()">Ulang</button></div>
+<div class="card"><h3>3. Kad Imbas Digital</h3><p>Klik kad untuk membalikkannya.</p><div class="fc" id="fc"><div><div class="f" id="ff"></div><div class="b" id="fbk"></div></div></div><button class="btn" onclick="nextF()">Kad Seterusnya ➜</button></div></div></div></section>
+
+<section id="misi"><div class="w"><h2>Permainan Misi</h2><p class="sub" id="gst"></p><div class="card"><h3>Misi Pengembaraan Manuskrip</h3><p>Klik permainan untuk mula. Gerak dengan anak panah atau A dan D. Lompat dengan ruang atau W. Kutip syiling dan lompat dari bawah untuk menghentak kotak ? lalu jawab soalan. Nyawa tidak terhad. Jika jatuh ke lubang anda muncul semula dan boleh cuba lagi. Selesaikan 6 kotak dan capai bendera.</p>
+<div style="position:relative"><canvas id="gc" width="800" height="360" tabindex="0" aria-label="Permainan misi platform" style="width:100%;display:block;border-radius:16px;background:#7dd3fc;touch-action:none"></canvas>
+<div id="gov" style="display:none;position:absolute;inset:0;background:rgba(15,23,42,.92);color:#fff;border-radius:16px;padding:1rem;overflow:auto"><p id="gq" style="font-weight:700;margin:0 0 .6rem"></p><div class="chips" id="go" style="flex-direction:column;align-items:stretch"></div><div class="fb" id="gf"></div><button class="btn" id="gn" style="display:none" onclick="gCont()">Teruskan</button></div></div>
+<div style="display:flex;gap:.5rem;margin-top:.6rem;justify-content:center;flex-wrap:wrap"><button class="btn" id="gbl" aria-label="Kiri">◀</button><button class="btn" id="gbj" aria-label="Lompat">⬆ Lompat</button><button class="btn" id="gbr" aria-label="Kanan">▶</button><button class="btn alt" id="grs" onclick="gInit();gc.focus()">🔄 Main Semula</button></div></div></div></section>
+<section id="simulasi" class="alt-bg"><div class="w"><h2>Simulasi Situasi Harian</h2><p class="sub" id="sst"></p><div class="card"><h3>Situasi Dunia Sebenar</h3><p id="smq" style="font-weight:600"></p><div class="chips" id="smo" style="flex-direction:column;align-items:stretch"></div><div class="fb" id="smf"></div><button class="btn" id="smn" style="display:none" onclick="smNext()">Situasi Seterusnya</button></div></div></section>
+<section id="kuiz"><div class="w"><h2>Kuiz Kendiri</h2><p class="sub" id="qp"></p><div class="card"><h3 id="qq"></h3><div class="chips" id="qo" style="flex-direction:column;align-items:stretch"></div><div class="fb" id="qf"></div><button class="btn" id="qn" onclick="qNext()" style="display:none">Seterusnya</button></div></div></section>
+
+<section id="rujukan" class="alt-bg"><div class="w"><h2>Rujukan (APA 7)</h2>
+<p class="ref">Abdul Hamid, F. A., &amp; Abdullah, N. (2009). Penguasaan tulisan Jawi di kalangan mahasiswa pengajian Islam: Kajian di Institut Pengajian Tinggi Awam (IPTA) tempatan. <i>Jurnal Al-Tamaddun, 4</i>, 145–156. https://fiqh.um.edu.my/index.php/JAT/article/download/8344/6095/17976</p>
+<p class="ref">Bernama. (2020, July 10). DBP sokong hari Jumaat sebagai Hari Jawi. <i>Sinar Harian</i>. https://www.sinarharian.com.my/article/91652/BERITA/Nasional/DBP-sokong-hari-Jumaat-sebagai-Hari-Jawi</p>
+<p class="ref">Faisal @ Ahmad Faisal bin Abdul Hamid, &amp; Faizuri bin Abdul Latif. (2014). Sejarah perkembangan tulisan Jawi: Analisis mengenai teori Kang Kyoung Seok. <i>Jurnal al-Tamaddun, 9</i>(2), 1–15. https://adab.um.edu.my/index.php/JAT/article/download/8673/6168/18047</p>
+<p class="ref">Ho, K. C. (2015). Peranan Dong Jiao Zong dan Dewan Bahasa dan Pustaka dalam pengendalian dan perkembangan pendidikan bahasa ibunda. <i>Journal of Chinese Literature and Culture, 3</i>(2), 95–117. https://doi.org/10.22452/jclc.vol3no2.7</p>
+<p class="ref">Kurniawan, Y. (2025, November 1). Memartabat bahasa Melayu tanpa menyisih dunia. <i>Utusan Malaysia</i>. https://www.utusan.com.my/rencana/2025/11/memartabat-bahasa-melayu-tanpa-menyisih-dunia/</p>
+<p class="ref">Laupa Junus. (2024, June 23). Rakyat tuai hasil usaha DBP perkukuh bahasa Melayu. <i>Utusan Malaysia</i>. https://www.utusan.com.my/gaya/sastera/2024/06/rakyat-tuai-hasil-usaha-dbp-perkukuh-bahasa-melayu/</p>
+<p class="ref">Laupa Junus. (2026, July 5). Usaha DBP perkasa bahasa Melayu mendepani kepantasan dunia digital. <i>Utusan Malaysia</i>. https://www.utusan.com.my/nasional/2026/07/usaha-dbp-perkasa-bahasa-melayu-mendepani-kepantasan-dunia-digital/</p>
+<p class="ref">Mohd. Alwee Yusoff. (2005). Perkembangan tulisan Jawi dan aplikasinya dalam masyarakat Islam di Malaysia. <i>Jurnal Usuluddin, 21</i>, 23–38. https://ajap.um.edu.my/index.php/JUD/article/download/4224/2071/10257</p>
+<p class="ref">Shuhairimi Abdullah. (2012). Kelangsungan tulisan Jawi dalam era globalisasi: Satu analisis. <i>Prosiding Seminar Pendidikan Melayu Antarabangsa (SePMA 2)</i> (pp. 146–151). Universiti Malaysia Perlis. https://ris.unimap.edu.my/bitstreams/e5e8f51e-ebf6-429f-a59f-743c23bd6f15/download</p>
+</div></section>
+
+<footer><p>© 2026 Muzium Digital Bahasa Melayu · Tugasan 2, GKEB 1072 · IPG</p></footer>
+<div id="ai"><div id="aip" role="dialog" aria-label="Pembantu carian muzium"><b>🤖 Pembantu Carian Muzium</b><div id="ail"><p>Tanya apa sahaja. Contoh: bila DBP ditubuhkan atau apa itu Jawi.</p></div><input id="aiq" placeholder="Taip soalan anda lalu tekan Enter" aria-label="Soalan anda"><div id="sq"></div></div><button id="aib" aria-label="Buka pembantu carian" onclick="togAI()">🤖</button></div>
+<button id="top" aria-label="Kembali ke atas" onclick="scrollTo({top:0})">↑</button>
+
+<script>
+var seen={},done={m:0,o:0};
+function say(t,btn){try{speechSynthesis.cancel();if(curBtn){curBtn.textContent="🔊 Dengar";curBtn=null}var u=new SpeechSynthesisUtterance(t);u.lang="ms-MY";u.rate=.95;var v=speechSynthesis.getVoices().filter(function(x){return x.lang.toLowerCase().indexOf("ms")===0})[0];if(v)u.voice=v;if(btn){curBtn=btn;btn.textContent="⏹ Henti";u.onend=u.onerror=function(){if(curBtn===btn){btn.textContent="🔊 Dengar";curBtn=null}}}speechSynthesis.speak(u)}catch(e){}}
+var curBtn=null;
+function toggleSay(b,t){if(curBtn===b){speechSynthesis.cancel();b.textContent="🔊 Dengar";curBtn=null}else say(t,b)}
+var TL=[["683 M","Aksara Pallava dan Kawi","Batu bersurat Kedukan Bukit (683 M) dan lain-lain menggunakan bahasa Melayu Kuno dan aksara Pallava/Kawi pada zaman Sriwijaya (Abdul Hamid & Abdullah, 2009)."],
+["1303 M","Batu Bersurat Terengganu","Bertarikh 702 H/1303 M, ditulis sepenuhnya dalam bahasa Melayu berhuruf Arab, menandakan tulisan Jawi (Mohd. Alwee Yusoff, 2005)."],
+["1300 – 1986","Tiga period Kang Kyoung Seok","Kang membahagikan perkembangan Jawi kepada tiga period. Pada 1300 hingga 1600 unsur Arab dihilangkan. Pada 1600 hingga 1900 vokal dinyatakan dalam suku kata terbuka. Pada 1900 hingga 1986 hampir semua vokal dinyatakan (Faisal bin Abdul Hamid & Faizuri bin Abdul Latif 2014)."],
+["Abad ke-14 hingga 16","Jawi sebagai tulisan rasmi","Digunakan untuk kitab, sastera, warkah dan perjanjian; sekurang-kurangnya 10,000 naskhah manuskrip Jawi dihasilkan hingga abad ke-20 (Mohd. Alwee Yusoff, 2005)."],
+["1511","Kedatangan Rumi","Kedatangan Portugis ke Melaka membawa tulisan Rumi ke Nusantara (Mohd. Alwee Yusoff, 2005)."],
+["1888 – 1949","Pakatan dan Za’ba","Pakatan Belajar Mengajar Pengetahuan Bahasa ditubuhkan pada 1888 untuk menyeragamkan ejaan Jawi. Za’ba siap menyusun Daftar Ejaan Melayu Jawi-Rumi pada 1938 dan ia diterbitkan pada 1949 (Faisal bin Abdul Hamid & Faizuri bin Abdul Latif 2014)."],
+["1902 – 1941","Penyeragaman ejaan Rumi","Wilkinson merintis kaedah ejaan Rumi pada 1902 dan Za’ba menyusun Daftar Ejaan Melayu pada 1941 (Mohd. Alwee Yusoff, 2005)."],
+["27 Mac 1954","Memorandum ASAS 50","ASAS 50 mengemukakan hujah kelebihan Rumi dan Jawi sebagai media persuratan Melayu (Mohd. Alwee Yusoff, 2005)."],
+["22 Jun 1956","DBP ditubuhkan","Dewan Bahasa dan Pustaka ditubuhkan untuk membina dan memperkembang bahasa Melayu (Abdul Hamid & Abdullah, 2009)."],
+["1963/67","Akta Bahasa Kebangsaan","Menetapkan Rumi sebagai tulisan bahasa kebangsaan tanpa melarang penggunaan Jawi (Abdul Hamid & Abdullah, 2009)."],
+["16 Ogos 1972","Ejaan Baru (Malindo)","Ejaan baru diisytiharkan secara rasmi di Malaysia dan Indonesia (Mohd. Alwee Yusoff, 2005)."],
+["1973","Ejaan Jawi Dian","Sistem fonetik ini dikemukakan dalam majalah Dian bilangan 30 untuk memperbaiki ejaan Za’ba tetapi kurang mendapat sambutan (Faisal bin Abdul Hamid & Faizuri bin Abdul Latif 2014)."],
+["1984 – 1988","Pedoman Ejaan Jawi Yang Disempurnakan","DBP membentangkan hasil kajian dalam Konvensyen Kebangsaan Tulisan Jawi di Terengganu pada April 1984. Pedoman diterbitkan pada 1986 dan Daftar Ejaan Rumi-Jawi pada 1988 (Faisal bin Abdul Hamid & Faizuri bin Abdul Latif 2014)."],
+["1985 – 2004","Pemerkasaan semula Jawi","Jawi diwajibkan di sekolah rendah agama (1985), dimasukkan dalam KBSR (1992) dan program J-QAF (2004) (Abdul Hamid & Abdullah, 2009)."],
+["10 Julai 2020","Hari Jawi","Kerajaan menjadikan Jumaat sebagai Hari Jawi dan DBP menyokongnya. Jawi diiktiraf melalui Seksyen 9 Akta Bahasa Kebangsaan 1963/67 (Bernama 2020)."]];
+var h="";TL.forEach(function(x,i){h+='<div class="card" tabindex="0" onclick="this.classList.toggle(\'open\');mark(\'t'+i+'\')"><span class="yr">'+x[0]+'</span><h3>'+x[1]+'</h3><div class="more">'+x[2]+'</div></div>'});
+document.getElementById("tl").innerHTML=h;
+var CH=[["🔬","Pengajaran Sains dan Matematik","Dasar PPSMI bermula 2003 dan kemudian ditarik balik. Penilaian: pengalaman ini menunjukkan bahasa ibunda lebih berkesan dan DBP perlu aktif mempengaruhi dasar bahasa (Ho 2015)."],["💻","Globalisasi &amp; teknologi","Media sosial menggalakkan bahasa rojak dan singkatan. Penilaian: komunikasi menjadi pantas tetapi penguasaan ejaan dan tatabahasa yang betul menjadi lemah. Dunia digital juga bergerak lebih pantas daripada proses kodifikasi istilah (Laupa Junus 2026)."],["🏫","Kedudukan dalam pendidikan","Belanjawan 2026 menegaskan bahasa Melayu sebagai bahasa ilmu di semua peringkat pendidikan termasuk sekolah antarabangsa. Mulai 2026 pelajar warganegara di sekolah antarabangsa wajib mempelajari bahasa Melayu. Cabaran: guru terlatih dan bahan ajar yang relevan perlu disediakan (Kurniawan 2025)."],["🤖","Kecerdasan buatan","Sistem AI bergantung pada data bahasa yang besar. Jika sumber bahasa Melayu kurang berkualiti AI menjadi kurang fasih dan penggunaannya dalam dunia digital berkurangan. Algoritma platform besar juga dipengaruhi bahasa Inggeris (Laupa Junus 2026)."],["📉","Penguasaan Jawi","Kajian menunjukkan penguasaan Jawi pelajar masih rendah walaupun pelbagai program dijalankan (Abdul Hamid & Abdullah, 2009)."],["🌍","Kelangsungan Jawi dalam globalisasi","Generasi muda semakin mengabaikan Jawi. Cadangan: bahan ajar Jawi dalam pelbagai mata pelajaran dan penggunaan pelantar digital seperti Jawi.net (Shuhairimi Abdullah 2012)."]];
+h="";CH.forEach(function(x,i){h+='<div class="card" tabindex="0" onclick="this.classList.toggle(\'open\');mark(\'c'+i+'\')"><div class="ic">'+x[0]+'</div><h3>'+x[1]+'</h3><div class="more">'+x[2]+'</div></div>'});
+document.getElementById("chal").innerHTML=h;
+function mark(k){seen[k]=1;upd()}
+function upd(){var n=Object.keys(seen).length+done.m+done.o+(qDone?1:0),tot=TL.length+CH.length+3,p=Math.min(100,Math.round(n/tot*100));document.getElementById("pg").textContent=p+"%"}
+/* Aktiviti 1: padanan */
+var PM=[["683 M","Batu bersurat Kedukan Bukit"],["1303 M","Batu Bersurat Terengganu"],["1511","Portugis tiba di Melaka"],["22 Jun 1956","DBP ditubuhkan"]],ms=null,mc=0,score=0;
+function shuf(a){return a.slice().sort(function(){return Math.random()-.5})}
+function initM(){var a=document.getElementById("m1"),b=document.getElementById("m2");a.innerHTML="";b.innerHTML="";PM.forEach(function(p,i){var x=document.createElement("button");x.className="opt";x.textContent=p[0];x.onclick=function(){if(x.classList.contains("ok"))return;[].forEach.call(a.children,function(c){c.classList.remove("sel")});x.classList.add("sel");ms=i};a.appendChild(x)});
+shuf(PM.map(function(p,i){return i})).forEach(function(i){var y=document.createElement("button");y.className="opt";y.textContent=PM[i][1];y.onclick=function(){if(ms===null||y.classList.contains("ok"))return;var f=document.getElementById("mfb");if(ms===i){y.classList.add("ok");a.children[i].classList.remove("sel");a.children[i].classList.add("ok");f.textContent="✅ Betul!";score++;mc++;ms=null;sc();if(mc===PM.length){done.m=1;f.textContent="🎉 Semua padanan betul!";upd()}}else{f.textContent="❌ Cuba lagi.";y.classList.add("bad");setTimeout(function(){y.classList.remove("bad")},600)}};b.appendChild(y)})}
+function sc(){document.getElementById("asc").textContent=score}
+/* Aktiviti 2: susun */
+var OR=["Batu Bersurat Terengganu (1303)","Portugis tiba di Melaka (1511)","DBP ditubuhkan (1956)","Ejaan Baru (1972)"],on=0;
+function initO(){on=0;var c=document.getElementById("o1");c.innerHTML="";document.getElementById("ofb").textContent="";shuf(OR.map(function(_,i){return i})).forEach(function(i){var x=document.createElement("button");x.className="opt";x.textContent=OR[i];x.onclick=function(){if(x.classList.contains("ok"))return;var f=document.getElementById("ofb");if(i===on){x.classList.add("ok");on++;score++;sc();f.textContent="✅ Betul";if(on===OR.length){f.textContent="🎉 Kronologi lengkap!";done.o=1;upd()}}else{f.textContent="❌ Bukan yang seterusnya.";x.classList.add("bad");setTimeout(function(){x.classList.remove("bad")},600)}};c.appendChild(x)})}
+/* Aktiviti 3: kad imbas */
+var FC=[["Tulisan Jawi","Tulisan Melayu berasaskan abjad Arab"],["Batu Bersurat Terengganu","Bertarikh 1303 M, bukti awal tulisan Jawi"],["Plagiat","Mengambil idea orang lain tanpa sitasi"],["Akta Bahasa Kebangsaan","Menetapkan Rumi sebagai tulisan rasmi (1963/67)"]],fi=0;
+function nextF(){fi=(fi+1)%FC.length;showF()}function showF(){var c=document.getElementById("fc");c.classList.remove("flip");document.getElementById("ff").textContent=FC[fi][0];document.getElementById("fbk").textContent=FC[fi][1]}
+document.getElementById("fc").onclick=function(){this.classList.toggle("flip")};
+/* Kuiz */
+var Q=[["Batu Bersurat Terengganu bertarikh…",["683 M","1303 M","1511","1972"],1,"Bertarikh 702 H bersamaan 1303 M."],
+["Tulisan Rumi tiba di Nusantara bersama kedatangan…",["Arab","Inggeris","Portugis","Jepun"],2,"Portugis tiba di Melaka pada 1511."],
+["DBP ditubuhkan pada…",["22 Jun 1956","31 Ogos 1957","16 Ogos 1972","1 Januari 1963"],0,"Penubuhan DBP ialah 22 Jun 1956."],
+["Akta Bahasa Kebangsaan 1963/67 menetapkan tulisan rasmi ialah…",["Jawi sahaja","Rumi, tanpa melarang Jawi","Pallava","Kawi"],1,"Rumi ialah tulisan rasmi tetapi Jawi tidak dilarang."],
+["Ejaan Baru diisytiharkan secara rasmi pada…",["16 Ogos 1972","1902","1941","1985"],0,"Diisytiharkan di Malaysia dan Indonesia."],
+["Tindakan yang mengelakkan plagiat ialah…",["Salin terus","Parafrasa dan sitasi","Tukar fon","Buang rujukan"],1,"Parafrasa dan sitasi dengan rujukan APA 7."],
+["Pelajaran Jawi diwajibkan di sekolah rendah agama pada…",["1985","1956","1511","1303"],0,"Kementerian Pelajaran mewajibkannya pada 1985."],
+["Siapakah merintis kaedah ejaan Rumi pada 1902?",["Za’ba","R. J. Wilkinson","Munsyi Abdullah","Asmah Omar"],1,"Wilkinson merintis garis kasar ejaan Rumi."],
+["Mulai 2026 pelajar warganegara di sekolah antarabangsa wajib mempelajari…",["Bahasa Melayu","Bahasa Arab","Jawi sahaja","Tiada bahasa kebangsaan"],0,"Dasar ini dinyatakan dalam Belanjawan 2026."],
+["Pelantar digital DBP yang menyiarkan rancangan TV dan radio penstriman ialah…",["JendelaDBP","DBPNiaga","MASTERA","Pelita Bahasa"],0,"JendelaDBP beroperasi sejak 8 Mei 2021."],
+["Hari Jawi ditetapkan pada hari…",["Jumaat","Isnin","Ahad","Khamis"],0,"Kerajaan mengumumkannya pada 10 Julai 2020."],
+["Pedoman Ejaan Jawi Yang Disempurnakan diterbitkan pada…",["1986","1956","1963","2020"],0,"Daftar Ejaan Rumi-Jawi menyusul pada 1988."]],qi=0,qs=0,qDone=false,lock=false;
+function qShow(){lock=false;var q=Q[qi];document.getElementById("qp").textContent="Soalan "+(qi+1)+" daripada "+Q.length+" · Markah: "+qs;document.getElementById("qq").textContent=q[0];var o=document.getElementById("qo");o.innerHTML="";document.getElementById("qf").textContent="";document.getElementById("qn").style.display="none";
+q[1].forEach(function(t,i){var b=document.createElement("button");b.className="opt";b.textContent=t;b.onclick=function(){if(lock)return;lock=true;var c=i===q[2];if(c)qs++;b.classList.add(c?"ok":"bad");o.children[q[2]].classList.add("ok");document.getElementById("qf").textContent=(c?"✅ Betul! ":"❌ Kurang tepat. ")+q[3];document.getElementById("qp").textContent="Soalan "+(qi+1)+" daripada "+Q.length+" · Markah: "+qs;var n=document.getElementById("qn");n.style.display="inline-block";n.textContent=qi===Q.length-1?"Lihat Keputusan":"Seterusnya"};o.appendChild(b)})}
+function qNext(){qi++;if(qi>=Q.length){qDone=true;upd();var p=Math.round(qs/Q.length*100);document.getElementById("qq").textContent="Keputusan akhir: "+qs+" / "+Q.length+" ("+p+"%)";document.getElementById("qo").innerHTML="";document.getElementById("qf").textContent=p>=75?"🏆 Cemerlang! Anda pengunjung muzium yang hebat.":"📚 Teruskan usaha. Lawati semula galeri dan cuba lagi.";var n=document.getElementById("qn");n.textContent="Cuba Semula";n.onclick=function(){qi=0;qs=0;qDone=false;n.onclick=qNext;qShow()};document.getElementById("qp").textContent="Selesai"}else qShow()}
+window.addEventListener("scroll",function(){var d=document.documentElement,p=scrollY/(d.scrollHeight-innerHeight)*100;document.getElementById("bar").style.width=p+"%";document.getElementById("top").style.display=scrollY>600?"block":"none"});
+initM();initO();showF();qShow();
+[["Kesusasteraan",1285],["Sains Sosial",510],["Sains Tulen",437],["Bahasa",424],["Sains Gunaan",325],["Geografi dan Sejarah",243]].forEach(function(r){document.getElementById("ig").insertAdjacentHTML("beforeend",'<div class="bar"><span>'+r[0]+'</span><i style="width:'+Math.round(r[1]/1285*60)+'%"></i><b>'+r[1]+'</b></div>')});
+var AI=[{id:"kronologi",k:["jawi","rumi","tulisan","kronologi","batu bersurat","terengganu","pallava","kawi","aksara","portugis","abjad","manuskrip","hari jawi","pedoman","kang","dian","pakatan","za’ba","zaaba"],a:"Anda dibawa ke Galeri 1 tentang sejarah tulisan Melayu."},
+{id:"akademik",k:["etika","plagiat","ejaan","tatabahasa","apa","sitasi","turnitin","parafrasa","imbuhan","akademik","tulis"],a:"Anda dibawa ke bahagian etika penulisan ejaan dan tatabahasa."},
+{id:"dbp",k:["dbp","dewan bahasa","pustaka","akta","ordinan","kamus","istilah","majalah","1956","balai","terbit","ditubuhkan","jendeladbp","ulang tahun","pelan strategik","audit"],a:"Anda dibawa ke Galeri 2 tentang peranan DBP. DBP ditubuhkan pada 22 Jun 1956."},
+{id:"cabaran",k:["cabaran","pendidikan","masa depan","ai","teknologi","globalisasi","inggeris","ppsmi","digital","sekolah","belanjawan","algoritma","rojak","media sosial"],a:"Anda dibawa ke Galeri 3 tentang cabaran bahasa Melayu dalam pendidikan."},
+{id:"aktiviti",k:["aktiviti","main","permainan","padan","susun","kad imbas","latihan","seret"],a:"Anda dibawa ke ruang aktiviti interaktif."},
+{id:"kuiz",k:["kuiz","soalan","markah","ujian","skor"],a:"Anda dibawa ke kuiz kendiri."},
+{id:"rujukan",k:["rujukan","sumber","bibliografi","penulis","jurnal"],a:"Anda dibawa ke senarai rujukan APA 7."},
+{id:"pengenalan",k:["pengenalan","muzium"],a:"Anda dibawa ke pengenalan muzium."}];
+function togAI(){var p=document.getElementById("aip");p.style.display=p.style.display==="block"?"none":"block";if(p.style.display==="block")document.getElementById("aiq").focus()}
+function addM(t,c){var p=document.createElement("p");p.className=c;p.textContent=t;var l=document.getElementById("ail");l.appendChild(p);l.scrollTop=l.scrollHeight}
+function ask(q){q=q.toLowerCase().trim();if(!q)return;addM(q,"u");var best=null,bs=0;AI.forEach(function(x){var s=0;x.k.forEach(function(w){var re=new RegExp("(^|[^a-z])"+w+"([^a-z]|$)");if(re.test(q))s+=w.length>3?2:1});if(s>bs){bs=s;best=x}});
+if(!best){addM("Maaf saya belum faham soalan itu. Cuba sebut Jawi DBP cabaran etika aktiviti atau kuiz.","");return}
+addM(best.a,"");var el=document.getElementById(best.id);el.scrollIntoView({behavior:"smooth"});el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");mark("ai"+best.id);if(innerWidth<700)document.getElementById("aip").style.display="none"}
+document.getElementById("aiq").addEventListener("keydown",function(e){if(e.key==="Enter"){ask(this.value);this.value=""}});
+document.getElementById("bub").onclick=function(){say(this.textContent)};
+document.querySelectorAll("#pengenalan .card,#akademik .card,#kronologi .card,#dbp .card,#cabaran .card").forEach(function(c){var b=document.createElement("button");b.className="say sp";b.textContent="🔊 Dengar";b.setAttribute("aria-label","Dengar maklumat kad ini");b.onclick=function(e){e.stopPropagation();var k=c.cloneNode(true);k.querySelectorAll("button,.ic,.jawi,.yr,h3,svg,img,canvas").forEach(function(x){x.remove()});toggleSay(b,k.textContent.replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF\uFE0F]/gu,"").replace(/\s+/g," ").trim())};c.appendChild(b)});
+try{speechSynthesis.getVoices()}catch(e){}
+var SQ=[["Apakah beza Jawi dan Rumi?","jawi lawan rumi","Jawi berasaskan abjad Arab manakala Rumi berasaskan abjad Latin yang dibawa Portugis pada 1511."],
+["Apakah Batu Bersurat Terengganu?","batu bersurat terengganu","Batu bersurat bertarikh 702 H atau 1303 M dan menjadi bukti awal tulisan Jawi."],
+["Bilakah Rumi mula digunakan?","kedatangan rumi","Rumi dibawa ke Nusantara apabila Portugis tiba di Melaka pada 1511."],
+["Siapakah Za’ba dan apa sumbangannya?","pakatan dan za","Za’ba menyusun Daftar Ejaan Melayu Jawi-Rumi pada 1938 dan ia diterbitkan pada 1949."],
+["Apakah tiga period perkembangan Jawi?","tiga period","Kang membahagikan Jawi kepada tiga period iaitu 1300 hingga 1600 dan 1600 hingga 1900 dan 1900 hingga 1986."],
+["Apakah Akta Bahasa Kebangsaan 1963/67?","akta bahasa kebangsaan","Akta ini menetapkan Rumi sebagai tulisan rasmi tanpa melarang Jawi."],
+["Apakah Pedoman Ejaan Jawi Yang Disempurnakan?","pedoman ejaan jawi","DBP menerbitkannya pada 1986 dan Daftar Ejaan Rumi-Jawi pada 1988."],
+["Apakah Hari Jawi?","hari jawi","Kerajaan menjadikan Jumaat sebagai Hari Jawi pada 10 Julai 2020."],
+["Bagaimana ejaan Rumi berkembang?","sistem ejaan","Daripada kaedah Wilkinson 1902 kepada ejaan Za’ba 1941 dan Ejaan Baru 1972."],
+["Apakah plagiat dan cara mengelaknya?","etika & plagiat","Parafrasa dan buat sitasi dengan rujukan APA 7."],
+["Bilakah DBP ditubuhkan?","balai pustaka","DBP ditubuhkan pada 22 Jun 1956 dengan nama asal Balai Pustaka."],
+["Apakah tugas utama DBP?","empat tugas utama","DBP memperkembang bahasa dan sastera kebangsaan menerbitkan buku serta menyeragamkan ejaan sebutan dan istilah."],
+["Apakah Ordinan DBP 1959?","ordinan dbp 1959","Ordinan ini menjadikan DBP badan berkanun dengan kuasa autonomi."],
+["Apakah kerjasama serantau DBP?","kerjasama serantau","DBP terlibat dalam penyelarasan ejaan Malaysia dan Indonesia melalui Jawatankuasa Ejaan Malindo."],
+["Apakah majalah terbitan DBP?","majalah dbp","Antaranya Dewan Bahasa Dewan Masyarakat Dewan Siswa dan Pelita Bahasa."],
+["Berapakah buku dan istilah DBP?","17 869","DBP menerbitkan 17 869 judul buku dan membentuk 985 427 istilah."],
+["Apakah JendelaDBP?","jendeladbp","Pelantar digital DBP yang dicapai oleh 21 112 203 pelayar dari 189 negara."],
+["Apakah peranan DBP dalam era digital?","pelan strategik","Pelan Strategik 2026 hingga 2030 menumpukan pendigitalan dan ekosistem bahasa Melayu."],
+["Bagaimana DBP memantau penggunaan bahasa?","audit dan pantau","Melalui ziarah bahasa audit bahasa dan pemantauan di sektor awam dan tempat awam."],
+["Apakah cabaran AI kepada bahasa Melayu?","kecerdasan buatan","AI kurang fasih jika data bahasa Melayu tidak mencukupi atau kurang berkualiti."],
+["Bagaimana media sosial menjejaskan bahasa?","globalisasi & teknologi","Media sosial menggalakkan bahasa rojak dan singkatan yang melemahkan ejaan dan tatabahasa."],
+["Apakah dasar bahasa dalam Belanjawan 2026?","kedudukan dalam pendidikan","Bahasa Melayu dimartabatkan sebagai bahasa ilmu dan wajib dipelajari oleh pelajar warganegara di sekolah antarabangsa."],
+["Apakah isu PPSMI?","pengajaran sains dan matematik","PPSMI bermula pada 2003 dan kemudian ditarik balik."],
+["Bagaimana Jawi dapat bertahan?","kelangsungan jawi","Melalui bahan ajar Jawi dan pelantar digital seperti Jawi.net."]];
+var CSEL="#pengenalan .card,#akademik .card,#kronologi .card,#dbp .card,#cabaran .card";
+function goCard(t){var c=null,L=document.querySelectorAll(CSEL);for(var i=0;i<L.length;i++){var h=L[i].querySelector("h3");if(h&&h.textContent.toLowerCase().indexOf(t)>-1){c=L[i];break}}if(!c)return false;if(c.closest("#tl")||c.closest("#chal"))c.classList.add("open");c.scrollIntoView({behavior:"smooth",block:"center"});c.classList.remove("flash");void c.offsetWidth;c.classList.add("flash");mark("q"+t);return true}
+function closeM(){if(innerWidth<700)document.getElementById("aip").style.display="none"}
+function goQ(x){addM(x[0],"u");addM(x[2],"");goCard(x[1]);closeM()}
+SQ.forEach(function(x){var b=document.createElement("button");b.className="say";b.textContent=x[0];b.onclick=function(){goQ(x)};document.getElementById("sq").appendChild(b)});
+var STOP="apa apakah siapa siapakah bagaimana bilakah bila mana yang itu ini untuk dalam dengan tentang terangkan jelaskan huraikan beritahu saya nak mahu ada adalah kepada dari daripada atau sebagai oleh kamu tolong boleh cerita dan bahasa melayu".split(" ");
+function toks(s){return s.toLowerCase().split(/[^a-z0-9]+/).filter(function(w){return w.length>2&&STOP.indexOf(w)<0})}
+function ask(q){q=(q||"").trim();if(!q)return;var t=toks(q),best=null,bs=0;SQ.forEach(function(x){var s=0,qt=toks(x[0]),ot=toks(x[1]+" "+x[2]);t.forEach(function(w){if(qt.indexOf(w)>-1)s+=2;else if(ot.indexOf(w)>-1)s+=1});if(s>bs){bs=s;best=x}});
+if(best&&bs>=2){goQ(best);return}
+addM(q,"u");var sec=null,ss=0,ql=q.toLowerCase();AI.forEach(function(x){var s=0;x.k.forEach(function(w){if(ql.indexOf(w)>-1)s+=w.length>3?2:1});if(s>ss){ss=s;sec=x}});
+if(!sec){addM("Maaf saya belum jumpa jawapan tepat. Cuba pilih salah satu soalan cadangan di bawah.","");return}
+addM(sec.a,"");var el=document.getElementById(sec.id);el.scrollIntoView({behavior:"smooth"});el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash");closeM()}
+var MG=[["Pintu Zaman: artifak manakah bertarikh 1303 M?",["Batu Bersurat Terengganu","Daftar Ejaan Rumi-Jawi","Kamus Dewan Perdana"],0,"Batu Bersurat Terengganu bertarikh 702 H bersamaan 1303 M."],["Pelabuhan Melaka 1511: tulisan apakah dibawa oleh Portugis?",["Jawi","Rumi","Kawi"],1,"Rumi tiba bersama Portugis."],["Bilik Pembakuan: siapakah menyusun Daftar Ejaan Melayu Jawi-Rumi yang diterbitkan pada 1949?",["Za’ba","R. J. Wilkinson","Awang Sariyan"],0,"Za’ba siap menyusunnya pada 1938 dan ia diterbitkan pada 1949."],["Pejabat Johor Bahru 22 Jun 1956: badan bahasa manakah ditubuhkan?",["Dewan Bahasa dan Pustaka","Memorandum ASAS 50","Pusat Dokumentasi Melayu"],0,"DBP bermula sebagai Balai Pustaka di Johor Bahru."],["Makmal Digital: pelantar DBP manakah dicapai pelayar dari 189 negara?",["JendelaDBP","Pelita Bahasa","Dewan Siswa"],0,"JendelaDBP dicapai oleh 21 112 203 pelayar."],["Bilik Darjah Masa Depan: Belanjawan 2026 mewajibkan pelajar warganegara di sekolah antarabangsa mempelajari…",["Bahasa Melayu","Bahasa Arab","Jawi sahaja"],0,"Dasar ini mengukuhkan bahasa Melayu sebagai bahasa ilmu."]];
+var gi=0,gp=0,gl=3,gk=false,gEnd=false;
+function gHud(){document.getElementById("gst").textContent="Misi "+(gi+1)+" daripada "+MG.length+" · Mata: "+gp+" · Nyawa: "+"❤️".repeat(Math.max(gl,0))}
+function gShow(){gk=false;gEnd=false;var q=MG[gi];gHud();document.getElementById("gq").textContent=q[0];var o=document.getElementById("go");o.innerHTML="";document.getElementById("gf").textContent="";document.getElementById("gn").style.display="none";
+q[1].forEach(function(t,i){var b=document.createElement("button");b.className="opt";b.textContent=t;b.onclick=function(){if(gk)return;gk=true;var c=i===q[2];if(c)gp+=10;else gl--;b.classList.add(c?"ok":"bad");o.children[q[2]].classList.add("ok");document.getElementById("gf").textContent=(c?"✅ Betul! +10 mata. ":"❌ Nyawa berkurang. ")+q[3];gHud();var n=document.getElementById("gn");n.style.display="inline-block";n.textContent=(gl<=0||gi===MG.length-1)?"Lihat Keputusan":"Teruskan Misi"};o.appendChild(b)})}
+function gEndShow(m){gEnd=true;document.getElementById("gq").textContent="Keputusan Misi: "+gp+" mata";document.getElementById("go").innerHTML="";document.getElementById("gf").textContent=m;document.getElementById("gst").textContent="Misi tamat";var n=document.getElementById("gn");n.style.display="inline-block";n.textContent="Main Semula"}
+function gNext(){if(gEnd){gi=0;gp=0;gl=3;gShow();return}if(gl<=0){gEndShow("Nyawa habis. Lawati semula galeri lalu cuba lagi.");return}gi++;if(gi>=MG.length){gEndShow(gp>=50?"🏅 Penjaga Manuskrip Emas":gp>=30?"🥈 Penjelajah Muzium":"🥉 Pelawat Baharu");return}gShow()}
+var SM=[["Situasi 1: Anda menjumpai artikel jurnal yang sangat sesuai untuk tugasan IPG. Apakah tindakan terbaik?",[["Menyalin ayat lalu menampalnya terus",0],["Menukar beberapa perkataan tanpa menyatakan sumber",0],["Memparafrasa dengan ayat sendiri dan meletakkan sitasi APA 7",2]],"Parafrasa dengan sitasi mengelakkan plagiat."],
+["Situasi 2: Anda menghantar notis rasmi kelas melalui kumpulan WhatsApp. Bagaimanakah ayat anda ditulis?",[["Menggunakan singkatan seperti sy dan awk",0],["Menggunakan ayat penuh dengan ejaan dan tatabahasa yang betul",2],["Mencampurkan bahasa Melayu dan Inggeris",1]],"Notis rasmi memerlukan bahasa baku yang jelas."],
+["Situasi 3: Seorang murid warganegara di sekolah antarabangsa enggan belajar bahasa Melayu. Apakah respons anda?",[["Menerangkan dasar Belanjawan 2026 dan menyediakan aktiviti yang menarik",2],["Membiarkan sahaja kerana mata pelajaran lain lebih penting",0],["Memaksa tanpa penerangan",1]],"Penerangan dasar dan pendekatan menarik lebih berkesan."],
+["Situasi 4: Sebuah kedai mahu menambah tulisan Jawi pada papan tanda. Apakah rujukan terbaik?",[["Meneka ejaan sendiri",0],["Menyalin daripada media sosial",1],["Merujuk Pedoman Ejaan Jawi dan Daftar Ejaan Rumi-Jawi terbitan DBP",2]],"Pedoman DBP memastikan ejaan Jawi seragam."]],si=0,sp=0,sk=false,sEnd=false;
+function smHud(){document.getElementById("sst").textContent="Situasi "+(si+1)+" daripada "+SM.length+" · Skor: "+sp+" / "+SM.length*2}
+function smShow(){sk=false;sEnd=false;var q=SM[si];smHud();document.getElementById("smq").textContent=q[0];var o=document.getElementById("smo");o.innerHTML="";document.getElementById("smf").textContent="";document.getElementById("smn").style.display="none";
+q[1].forEach(function(t){var b=document.createElement("button");b.className="opt";b.textContent=t[0];b.onclick=function(){if(sk)return;sk=true;sp+=t[1];b.classList.add(t[1]===2?"ok":"bad");document.getElementById("smf").textContent=(t[1]===2?"✅ Pilihan terbaik. ":t[1]===1?"⚠️ Boleh diperbaiki. ":"❌ Kurang sesuai. ")+q[2];smHud();var n=document.getElementById("smn");n.style.display="inline-block";n.textContent=si===SM.length-1?"Lihat Keputusan":"Situasi Seterusnya"};o.appendChild(b)})}
+function smNext(){if(sEnd){si=0;sp=0;smShow();return}si++;if(si>=SM.length){sEnd=true;document.getElementById("smq").textContent="Skor akhir: "+sp+" / "+SM.length*2;document.getElementById("smo").innerHTML="";document.getElementById("smf").textContent=sp>=7?"🏆 Anda pandai menggunakan bahasa dalam kehidupan harian.":"📚 Cuba lagi untuk memperbaiki pilihan anda.";document.getElementById("sst").textContent="Simulasi tamat";document.getElementById("smn").textContent="Main Semula";return}smShow()}
+smShow();
+CSEL+=",#misi .card,#simulasi .card";
+[["Mahu bermain permainan misi","misi pengembaraan","Anda akan menjelajah enam misi dengan tiga nyawa."],["Mahu cuba simulasi situasi harian","situasi dunia sebenar","Anda akan memilih tindakan terbaik dalam empat situasi harian."]].forEach(function(x){SQ.push(x);var b=document.createElement("button");b.className="say";b.textContent=x[0];b.onclick=function(){goQ(x)};document.getElementById("sq").appendChild(b)});
+/* Permainan platform */
+var GW=3600,GY=300,gc=document.getElementById("gc"),cx=gc.getContext("2d"),plats,gr,fl,boxes,coins,P,keys={},gPts,gOK,gLives,gBoxes,gPause,gDone,gT=0,gMsg="",gMsgT=0,gMode="cont",gRun=false,gLoopOn=false;
+function gInit(){gr=[[0,860],[960,1460],[1560,2010],[2110,2560],[2660,3060],[3160,3600]].map(function(s){return{x:s[0],y:GY,w:s[1]-s[0],h:60}});fl=[];[700,1300,1850,2400,2900].forEach(function(x){fl.push({x:x,y:220,w:130,h:16})});plats=gr.concat(fl);boxes=[];[520,1100,1600,2150,2700,3200].forEach(function(x,i){boxes.push({x:x,y:190,w:40,h:40,q:true,used:false,i:i})});coins=[];for(var x=250;x<3400;x+=150)coins.push({x:x,y:265,got:false});fl.forEach(function(p){coins.push({x:p.x+30,y:190,got:false},{x:p.x+85,y:190,got:false})});P={x:60,y:GY-44,w:30,h:44,vx:0,vy:0,on:false,face:1};keys={};gMsgT=0;gPts=0;gOK=0;gLives=3;gBoxes=0;gPause=false;gDone=false;gMode="cont";document.getElementById("gov").style.display="none"}
+function ov(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
+function gStep(){gT++;P.vx=(keys.l?-4:0)+(keys.r?4:0);if(P.vx)P.face=P.vx>0?1:-1;if(keys.j&&P.on){P.vy=-12;P.on=false}P.vy=Math.min(P.vy+.6,14);var S=plats.concat(boxes);
+P.x=Math.max(0,Math.min(GW-P.w,P.x+P.vx));S.forEach(function(s){if(ov(P,s)){if(P.vx>0)P.x=s.x-P.w;else if(P.vx<0)P.x=s.x+s.w}});
+P.y+=P.vy;P.on=false;S.forEach(function(s){if(ov(P,s)){if(P.vy>0){P.y=s.y-P.h;P.vy=0;P.on=true}else if(P.vy<0){P.y=s.y+s.h;P.vy=0;if(s.q&&!s.used){s.used=true;gBoxes++;gAsk(s.i)}}}});
+if(P.on&&Math.abs(P.y+P.h-GY)<1)P.sx=P.x;
+if(P.y>400){gMsg="Jatuh ke lubang! Cuba lagi";gMsgT=90;P.x=P.sx||60;P.y=GY-P.h-2;P.vy=0}
+coins.forEach(function(c){if(!c.got&&Math.abs(P.x+15-c.x)<22&&Math.abs(P.y+22-c.y)<30){c.got=true;gPts+=5}});
+if(P.x>3450&&!gPause){if(gBoxes<6){gMsg="Hentak semua 6 kotak ? dahulu";gMsgT=90;P.x=3440}else gFinish(true)}
+if(gMsgT>0)gMsgT--;document.getElementById("gst").textContent="Mata: "+gPts+" · Nyawa: ∞"+" · Kotak: "+gBoxes+"/6"}
+function gAsk(i){gPause=true;keys={};var q=MG[i],o=document.getElementById("go");document.getElementById("gq").textContent=q[0];o.innerHTML="";document.getElementById("gf").textContent="";document.getElementById("gn").style.display="none";var done=false;
+q[1].forEach(function(t,k){var b=document.createElement("button");b.className="opt";b.textContent=t;b.onclick=function(){if(done)return;done=true;var c=k===q[2];if(c){gPts+=20;gOK++}b.classList.add(c?"ok":"bad");o.children[q[2]].classList.add("ok");document.getElementById("gf").textContent=(c?"✅ Betul! +20 mata. ":"❌ Kurang tepat. ")+q[3];var n=document.getElementById("gn");n.style.display="inline-block";n.textContent="Teruskan Berjalan"};o.appendChild(b)});document.getElementById("gov").style.display="block"}
+function gFinish(win){gDone=true;gPause=true;gMode="reset";var m=win?(gPts>=180?"🏅 Penjaga Manuskrip Emas":gPts>=110?"🥈 Penjelajah Muzium":"🥉 Pelawat Baharu"):"Nyawa habis. Lawati semula galeri lalu cuba lagi.";document.getElementById("gq").textContent=win?"🎉 Tahniah! Anda berjaya menamatkan misi dan mencapai bendera!":"Misi gagal. Nyawa anda telah habis.";document.getElementById("go").innerHTML="";var gfe=document.getElementById("gf");gfe.style.whiteSpace="pre-line";gfe.textContent="Jawapan betul: "+gOK+" daripada 6\nSyiling dikutip: "+((gPts-gOK*20)/5)+" daripada "+coins.length+"\nTotal mata: "+gPts+" daripada "+(coins.length*5+120)+"\n"+m;var n=document.getElementById("gn");n.style.display="inline-block";n.textContent="Main Semula";document.getElementById("gov").style.display="block"}
+function gCont(){if(gMode==="reset"){gInit();gc.focus();return}document.getElementById("gov").style.display="none";gPause=false;gc.focus()}
+function gDraw(){var cam=Math.max(0,Math.min(GW-800,P.x-300));cx.fillStyle="#7dd3fc";cx.fillRect(0,0,800,360);cx.fillStyle="rgba(255,255,255,.9)";for(var i=0;i<8;i++){var x=((i*260-cam*.4)%1200+1200)%1200-200,y=60+(i%3)*25;cx.beginPath();cx.arc(x,y,22,0,7);cx.arc(x+26,y-8,28,0,7);cx.arc(x+55,y+2,20,0,7);cx.fill()}
+cx.save();cx.translate(-cam,0);cx.fillStyle="#16a34a";gr.forEach(function(g){cx.fillRect(g.x,GY,g.w,12)});cx.fillStyle="#92400e";gr.forEach(function(g){cx.fillRect(g.x,GY+12,g.w,60)});
+fl.forEach(function(p){cx.fillStyle="#b45309";cx.fillRect(p.x,p.y,p.w,p.h);cx.fillStyle="#22c55e";cx.fillRect(p.x,p.y,p.w,5)});
+coins.forEach(function(c){if(c.got)return;cx.fillStyle="#fbbf24";cx.strokeStyle="#b45309";cx.beginPath();cx.arc(c.x,c.y+Math.sin(gT/10+c.x)*3,9,0,7);cx.fill();cx.stroke()});
+boxes.forEach(function(b){cx.fillStyle=b.used?"#9ca3af":"#fbbf24";cx.fillRect(b.x,b.y,b.w,b.h);cx.strokeStyle="#78350f";cx.lineWidth=3;cx.strokeRect(b.x,b.y,b.w,b.h);if(!b.used){cx.fillStyle="#78350f";cx.font="bold 28px Arial";cx.textAlign="center";cx.fillText("?",b.x+20,b.y+30)}});
+cx.fillStyle="#fff";cx.fillRect(3500,130,6,170);cx.fillStyle="#dc2626";cx.beginPath();cx.moveTo(3506,130);cx.lineTo(3550,150);cx.lineTo(3506,170);cx.fill();
+var px=P.x,py=P.y;cx.fillStyle="#1e1b4b";cx.fillRect(px+4,py+34,9,10);cx.fillRect(px+17,py+34,9,10);cx.fillStyle="#f59e0b";cx.fillRect(px+2,py+16,26,20);cx.fillStyle="#fcd5a5";cx.beginPath();cx.arc(px+15,py+10,10,0,7);cx.fill();cx.fillStyle="#111827";cx.fillRect(px+5,py-2,20,7);cx.beginPath();cx.arc(px+15+P.face*4,py+10,2,0,7);cx.fill();
+cx.restore();cx.fillStyle="rgba(0,0,0,.55)";cx.fillRect(0,0,800,30);cx.fillStyle="#fff";cx.font="bold 16px Arial";cx.textAlign="left";cx.fillText("Mata: "+gPts+"   Nyawa: ∞   Kotak: "+gBoxes+"/6",10,21);cx.textAlign="center";if(P.x<200){cx.fillText("Klik di sini lalu gerak ▶ dan lompat ⬆ untuk mencapai kotak ?",400,60)}if(gMsgT>0)cx.fillText(gMsg,400,90)}
+function gLoop(){if(!gRun){gLoopOn=false;return}if(!gPause&&!gDone)gStep();gDraw();requestAnimationFrame(gLoop)}
+var KM={ArrowLeft:"l",a:"l",A:"l",ArrowRight:"r",d:"r",D:"r",ArrowUp:"j",w:"j",W:"j"," ":"j"};
+gc.addEventListener("keydown",function(e){var k=KM[e.key];if(k){keys[k]=true;e.preventDefault()}});gc.addEventListener("keyup",function(e){var k=KM[e.key];if(k)keys[k]=false});gc.addEventListener("blur",function(){keys={}});gc.addEventListener("click",function(){gc.focus()});
+[["gbl","l"],["gbr","r"],["gbj","j"]].forEach(function(x){var b=document.getElementById(x[0]);b.addEventListener("pointerdown",function(e){e.preventDefault();keys[x[1]]=true});["pointerup","pointerleave","pointercancel"].forEach(function(ev){b.addEventListener(ev,function(){keys[x[1]]=false})})});
+new IntersectionObserver(function(en){gRun=en[0].isIntersecting;if(gRun&&!gLoopOn){gLoopOn=true;gLoop()}}).observe(gc);
+gInit();
+</script>
+</body>
+</html>
